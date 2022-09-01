@@ -9,7 +9,7 @@ export default function Navbar() {
                 <form onsubmit="event.preventDefault();" role="search"> 
                     {/* <label for="search">Search for stuff</label> */}
                     <input id="search" type="search" placeholder="Search for items and brands" autofocus required />
-                    <button type="submit"><img className="searchbar-search"src="./imageBank/search-desktop.png" alt="search button"/></button>    
+                    <button type="submit"><img className="searchbar-search"src="./imageBank/search-desktop-nobackground.png" alt="search button"/></button>    
 
                     {/* <img src="./imageBank/search-desktop.png" alt="search button"/> */}
                 </form>

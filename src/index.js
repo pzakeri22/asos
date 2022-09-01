@@ -4,6 +4,7 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './fonts/FuturaPTLight.otf';  
+import './fonts/FuturaPTMedium.otf';  
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

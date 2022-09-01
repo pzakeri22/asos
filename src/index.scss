@@ -21,7 +21,11 @@ code {
 
 @font-face {
   font-family: "futura-pt";
-  // src: url('fonts/FuturaPTMedium.otf') format('opentype');
   src: url('fonts/FuturaPTLight.otf') format('opentype');
 
   }
+
+@font-face {
+  font-family: "futura-bold"; 
+  src: url('fonts/FuturaPTMedium.otf') format('opentype');
+}
