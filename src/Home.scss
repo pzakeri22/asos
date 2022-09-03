@@ -2,6 +2,7 @@
 //media query. const columns = 
 //font family Futura-pt, Futura STD, Arial, Verdana, sans-serif, line-height 15px;
 //1172 <= is mobile, after that is desktop/tablet
+//@media only screen and (min-width: 1000px) { 
 
 $darkest: black;  //h1, black
 $grey1: hsl(0, 0, 17.6%); // off-black
@@ -20,7 +21,6 @@ $accent: hsl(344, 83.3%, 44.5%);
   --dur: .3s;
   --color-dark: #2f2f2f;
   --color-light: #fff;
-  --color-brand: #57bd84;
   --font-fam: 'futura-pt', sans-serif;
   // --font-fam: 'arial', sans-serif;
 
@@ -40,10 +40,12 @@ $accent: hsl(344, 83.3%, 44.5%);
 .homescreen { 
   display: grid; 
   grid-template-columns: 1fr; 
-  grid-template-rows: repeat (6, auto);     
+  grid-template-rows: repeat (8, auto);      
   grid-template-areas: 
+    "top-info"
     "navbar"
     "departmentbar"
+    "breadcrumbs"
     "banner"
     "sort-filter"
     "search-results"
@@ -55,6 +57,49 @@ $accent: hsl(344, 83.3%, 44.5%);
 }
 
 // .html {background-color: black;}  
+
+.top-info {
+  grid-area: top-info; 
+  display: none;
+}
+
+@media only screen and (min-width: 1173px) { 
+  .top-info {
+    display: flex;
+    width: 100%;   
+    justify-content: center; 
+    background-color: $grey7;
+
+    .container {
+      display: flex;
+      justify-content: flex-end;
+      width: 1366px; 
+      max-width: 100%;
+      padding: 0 2rem;
+
+      .info {
+        display: flex;
+        align-items: center;
+        border-left: 1px solid $grey5;
+
+         div {
+          padding: 0.3rem 1.1rem;
+          font-family: 'futura-pt'; 
+          font-size: 0.85rem;  
+          letter-spacing: 0.8px;
+          color: $grey3;
+          border-right: 1px solid $grey5;
+
+          img {
+            height: 1.2rem;
+            vertical-align: middle;
+          }
+
+        }
+      }
+    }
+  }
+}
 
 .navbar {
   grid-area: navbar;
@@ -77,45 +122,6 @@ $accent: hsl(344, 83.3%, 44.5%);
   }
 }
 
-.burgerlogo {
-  display: flex; 
-  align-items: center; 
-  gap: 1rem; 
-
-  img {
-    width: calc(3.0rem + 1.2vw);      
-    height: auto; 
-  } 
-  .burger {
-    display: flex;
-  }
-  .logo {
-    display: flex; 
-  }
-  
-  .gender {
-    display: none;
-  }
-
-}
-
-.searchbasket {
-  display: flex; 
-  align-items: center;  
-  gap: 1.5rem;    
-
-  .basket {
-    display: flex;
-  }
-
-  .search {
-    display: flex;
-  }
-
-}
-
-
-//1172 <= is mobile, after that is desktop/tablet
 @media only screen and (min-width: 1173px) { 
   .navbar {
     grid-area: navbar;
@@ -132,12 +138,13 @@ $accent: hsl(344, 83.3%, 44.5%);
       padding: 0 2.1rem;   
 
       form {
-        display:block;  
+        display: block;  
         position: relative;
-        width: 790px; 
+        width: 830px; 
         // background: var(--color-brand);
         border-radius: var(--rad); 
         background-color: white; 
+        margin: 0 1rem 0 1rem;
 
         input {
           height: var(--height);
@@ -149,9 +156,8 @@ $accent: hsl(344, 83.3%, 44.5%);
           width: 100%;
           padding: 0 1rem;
           border-radius: var(--rad);
+          letter-spacing: 0.3px; 
           appearance: none; //for iOS input[type="search"] roundedness issue. border-radius alone doesn't work
-          
-
           // z-index: 1;
           // position: relative;
           // background: var(--color-light);
@@ -226,22 +232,53 @@ $accent: hsl(344, 83.3%, 44.5%);
 
         }
 
-        // label {
-        //   position: absolute;
-        //   clip: rect(1px, 1px, 1px, 1px);
-        //   padding: 0;
-        //   border: 0;
-        //   height: 1px;
-        //   width: 1px;
-        //   overflow: hidden;
-
-        // }
-
       }
     }
 
   }
 
+}
+
+
+.burgerlogo {
+  display: flex; 
+  align-items: center; 
+  gap: 1rem; 
+
+  img {
+    width: calc(3.0rem + 1.2vw);      
+    height: auto; 
+  } 
+  .burger {
+    display: flex;
+  }
+  .logo {
+    display: flex; 
+  }
+  
+  .gender {
+    display: none;
+  }
+
+}
+
+.searchbasket {
+  display: flex; 
+  align-items: center;  
+  gap: 1.5rem;    
+
+  .basket {
+    display: flex;
+    margin-right: 0.8em;
+  }
+
+  .search {
+    display: flex;
+  }
+}
+
+@media only screen and (min-width: 1173px) {
+  
   .burgerlogo {
     gap: 0rem;  
 
@@ -260,70 +297,166 @@ $accent: hsl(344, 83.3%, 44.5%);
       padding: 1.4rem;   
       width: 7.0rem;    
 
-      font-family: 'futura-bold'; 
+      font-family: 'futura-bold2'; 
       font-weight: bold;
-      letter-spacing: 3px; 
-      font-size: 0.8rem;  
-
+      letter-spacing: 2px; 
+      font-size: 0.85rem;   
     }
+
     .women {
       background-color: $grey2;  
-
     }
 
     .men {
       border-right: 1px solid $grey2;
     }
   }
-
+  
 }
-
 
 .departmentbar {
   grid-area: departmentbar;
-  padding: 0.7rem; 
-  background-color: $grey2;  
-  color: white;
-  display: flex; 
-  justify-content: center; 
-  width: 100%; 
   display: none;  
+}
 
+@media only screen and (min-width: 1173px) { 
 
-  .container {
+  .departmentbar {
+    grid-area: departmentbar;
+    background-color: $grey2;  
     display: flex; 
-    width: 100%;  
-    max-width: 1366px;  
-    // flex-wrap: wrap;  
-    // display: none; 
-    
-    ul {
+    justify-content: center; 
+    width: 100%; 
+  
+    .container {
       display: flex; 
-      list-style: none; 
-      gap: 1.2rem; 
-      flex-wrap: wrap; 
+      width: 100%;  
+      max-width: 1366px;  
+      padding: 0 2.2rem;  
+      // flex-wrap: wrap;  
+      // display: none; 
+      
+      ul {
+        display: flex; 
+        list-style: none; 
+        flex-wrap: wrap;
+        height: 50px;
+        
+        li {
+          color: white;
+          font-family: 'futura-pt';
+          letter-spacing: 1px; 
+          font-size: 0.9rem;
+          padding: 1rem 0.7rem;
 
+        }
+        
+        .skew {
+          display: block;
+          padding-right: 0.7rem;
+          padding-left: 0.9rem;
+          margin: 0 0.5rem;
+          background-color: $accent;
+          -webkit-transform: skew(-12deg);
+          transform: skew(-12deg);
+
+           p {
+            transform: skew(12deg);
+            font-family: 'futura-bold';
+            letter-spacing: 1.5px;
+          }
+
+        }
+  
+      }
     }
+  }
+
+}
+
+.breadcrumbs {
+  grid-area: breadcrumbs;
+  display: none;
+}
+
+@media only screen and (min-width: 1173px) { 
+  .breadcrumbs {
+    display: flex;
+    background-color: white;
+    width: 100%;
+    justify-content: center;
+    border-bottom: 1px solid $grey5;
+
+    .container {
+      display: flex;
+      width: 100%; 
+      max-width: 1366px;
+      flex-direction: column; 
+      padding: 1em 2rem; 
+
+      ul {
+        display: flex;
+        list-style: none;
+        gap: 1rem; 
+        font-family: 'futura-pt';
+        font-size: 0.9rem;
+        letter-spacing: 0.5px; 
+
+        .current-page {
+          color: $grey4;
+
+        }
+
+      }
+    }
+
   }
 }
 
 .banner {
   grid-area: banner;
   background-color: $grey7;   
-  color: $grey1; 
-  padding: 0.8rem;  
-  text-align: center;
   width: 100%;   
+  display: flex;
+  justify-content: center;
+
+  .container {
+    display: flex;
+    flex-direction: column; 
+    width: 100%;
+    padding: 1rem 0.8rem;
+    max-width: 1366px;
+    gap: 1.4rem;
+
+    color: $grey1; 
+    text-align: center;
+    color: black; 
+
+  }
 
   h1 {
     color: black; 
+    font-family: 'futura-bold2';
+    letter-spacing: 2px;
+
+  }
+
+  p {
+    font-family: 'futura-pt';
+    letter-spacing: 1px;
+
   }
 
   .view-more {
     cursor: pointer; 
     font-weight: bold; 
+
   }
 }
+
+@media only screen and (min-width: 1173px) { 
+}
+
 
 .sort-filter { 
   grid-area: sort-filter;
