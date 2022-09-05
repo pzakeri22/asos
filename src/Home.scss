@@ -298,7 +298,6 @@ $accent: hsl(344, 83.3%, 44.5%);
       width: 7.0rem;    
 
       font-family: 'futura-bold2'; 
-      font-weight: bold;
       letter-spacing: 2px; 
       font-size: 0.85rem;   
     }
@@ -425,7 +424,7 @@ $accent: hsl(344, 83.3%, 44.5%);
     flex-direction: column; 
     width: 100%;
     padding: 1rem 0.8rem;
-    max-width: 1366px;
+    max-width: 1000px; 
     gap: 1.4rem;
 
     color: $grey1; 
@@ -437,7 +436,7 @@ $accent: hsl(344, 83.3%, 44.5%);
   h1 {
     color: black; 
     font-family: 'futura-bold2';
-    letter-spacing: 2px;
+    letter-spacing: 1.75px;
 
   }
 
@@ -449,7 +448,9 @@ $accent: hsl(344, 83.3%, 44.5%);
 
   .view-more {
     cursor: pointer; 
-    font-weight: bold; 
+    font-family: 'futura-bold2';
+    font-size: 0.9rem;
+    letter-spacing: 1.75px;
 
   }
 }
