@@ -6,11 +6,10 @@ export default function Navbar() {
         <nav className="navbar">
             <div className="container"> 
                 <BurgerLogo/> 
-                <form onsubmit="event.preventDefault();" role="search"> 
+                <form onSubmit={(event) => event.preventDefault} role="search"> 
                     {/* <label for="search">Search for stuff</label> */}
-                    <input id="search" type="search" placeholder="Search for items and brands" autofocus required />
+                    <input id="search" type="search" placeholder="Search for items and brands" autoFocus required />
                     <button type="submit"><img className="searchbar-search"src="./imageBank/search-desktop-nobackground.png" alt="search button"/></button>    
-
                     {/* <img src="./imageBank/search-desktop.png" alt="search button"/> */}
                 </form>
 

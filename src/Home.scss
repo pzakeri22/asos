@@ -30,7 +30,7 @@ $accent: hsl(344, 83.3%, 44.5%);
 }
 
 * {
-  // outline: 1px solid green;  
+  // outline: 1px solid brown;  
 }
 
 .burger {
@@ -346,7 +346,7 @@ $accent: hsl(344, 83.3%, 44.5%);
           font-family: 'futura-pt';
           letter-spacing: 1px; 
           font-size: 0.9rem;
-          padding: 1rem 0.7rem;
+          padding: 1rem 0.6rem;
 
         }
         
@@ -405,10 +405,8 @@ $accent: hsl(344, 83.3%, 44.5%);
           color: $grey4;
 
         }
-
       }
     }
-
   }
 }
 
@@ -422,48 +420,217 @@ $accent: hsl(344, 83.3%, 44.5%);
   .container {
     display: flex;
     flex-direction: column; 
-    width: 100%;
-    padding: 1rem 0.8rem;
-    max-width: 1000px; 
-    gap: 1.4rem;
-
-    color: $grey1; 
+    padding: 1.2rem 0.8rem 0.2rem 0.8rem;
+    max-width: 660px; 
     text-align: center;
-    color: black; 
-
   }
 
   h1 {
     color: black; 
     font-family: 'futura-bold2';
     letter-spacing: 1.75px;
-
+    margin-bottom: 1.5rem;
   }
 
   p {
     font-family: 'futura-pt';
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
+  }
 
+  .intro {
+    line-height: 1.4rem;
+  }
+
+  .intro.full-false {
+    height: 26px;
+    overflow: hidden;
+    white-space: no-wrap;
+    text-overflow: ellipsis;
+  }
+
+  .wrapper.view-more {
+    width: 100%;
+    background-color: $grey7;   
   }
 
   .view-more {
     cursor: pointer; 
     font-family: 'futura-bold2';
-    font-size: 0.9rem;
-    letter-spacing: 1.75px;
-
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    position: relative;
+    line-height: 50px;  
+    width: fit-content;
+    margin: 0 auto;
   }
+
+  .view-more.full-true {
+    margin-top: 0.6rem;
+  }
+
 }
 
 @media only screen and (min-width: 1173px) { 
+    
+  .banner {
+
+    .container {
+      padding: 1.2rem 0.8rem 0.2rem 0.8rem;
+      width: 100%;
+      max-width: 1000px; 
+    }
+
+    h1 {
+      margin-bottom: 0.6em;
+    }
+
+    .intro {
+      line-height: 1.4rem;
+    }
+
+    .intro.full-false {
+      height: 49px;
+      overflow: visible;
+      white-space: normal;
+      text-overflow: unset;
+    }
+
+    .wrapper.view-more {
+      width: 100%;
+      background: linear-gradient(180deg,hsla(0,0%,100%,0),#f8f8f8 1.38em);
+    }
+
+    .view-more {
+      cursor: pointer; 
+      font-family: 'futura-bold2';
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      position: relative;
+      line-height: 65px; 
+      width: fit-content;
+      margin: 0 auto;
+    }
+  }
+}
+
+.sort-filter { 
+  grid-area: sort-filter; 
+  background-color: $grey6;   
+  width: 100%;    
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid $grey5;
+  border-bottom: 1px solid $grey5;
+
+
+  .container { 
+    max-width: 1366px;
+    width: 100%;
+    padding: 0 0.7rem;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+
+    > div {
+      margin: 1rem 0;
+      width: 365px;
+      display: flex;
+      justify-content: center;
+      padding: 0 0.3rem;
+      align-items: center;
+      
+
+      > p {
+        display: inline-block;
+        line-height: 1.3rem;
+        text-align: center;
+        color: $grey3;
+        font-family: 'futura-bold2';
+        font-size: 0.9rem;
+        letter-spacing: 1.8px;
+        font-weight: bolder;
+      }
+
+      img {
+        height: 0.5rem;
+      }
+
+    }
+
+    .sort .mobile {
+      margin-right: 0.2rem;
+    }
+
+    .sort .desktop {
+      display: none;
+    }
+
+    > div:first-child {
+      border-right: 1px solid rgb(201, 201, 201);
+
+    }
+    
+    .type, .brand, .colour, .fit, .price {
+      display: none;
+    }
+
+
+
+  }
+  
 }
 
 
-.sort-filter { 
-  grid-area: sort-filter;
-  // padding: 1rem; 
-  background-color: $grey6;   
-  width: 100%;    
+@media only screen and (min-width: 1173px) { 
+
+  .sort-filter {
+    border: none;
+    border-top: 1px solid $grey5;
+
+    .container { 
+      justify-content: space-between;
+      padding: 0 2rem;
+      margin: 0.5rem 0;
+
+      .filter {
+        display: none;
+      }
+
+      .type, .brand, .colour, .fit, .price {
+        display: flex;
+      }
+
+      div {
+        border-top: 1px solid $grey5;
+        border-bottom: 1px solid $grey5;
+        width: 200px;
+        margin: 0;
+        justify-content: space-between;
+
+        > p {
+          line-height: 2.6rem;
+          font-family: 'futura-pt';
+          font-size: 1rem;
+          letter-spacing: 0.85px;
+          font-weight: 500;
+          color: $grey2;
+        }
+      }
+
+      > div:first-child {
+        border-right: none;
+      }
+  
+      .sort .mobile {
+        display: none;
+      }
+
+      .sort .desktop {
+        display: inline-block;
+      }
+
+    }
+  }
 }
 
 .search-results {
