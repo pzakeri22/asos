@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/asos/static/css/main.c03c84ce.css",
+    "main.js": "/asos/static/js/main.f8eafdad.js",
+    "static/js/787.148ed6eb.chunk.js": "/asos/static/js/787.148ed6eb.chunk.js",
+    "static/media/FuturaPTHeavy.otf": "/asos/static/media/FuturaPTHeavy.bee1d176707440e4d379.otf",
+    "static/media/FuturaPTMedium.otf": "/asos/static/media/FuturaPTMedium.7af6976ce738bec1704e.otf",
+    "static/media/FuturaPTLight.otf": "/asos/static/media/FuturaPTLight.725c77b4e125ed776783.otf",
+    "index.html": "/asos/index.html",
+    "main.c03c84ce.css.map": "/asos/static/css/main.c03c84ce.css.map",
+    "main.f8eafdad.js.map": "/asos/static/js/main.f8eafdad.js.map",
+    "787.148ed6eb.chunk.js.map": "/asos/static/js/787.148ed6eb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c03c84ce.css",
+    "static/js/main.f8eafdad.js"
+  ]
+}
