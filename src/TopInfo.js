@@ -1,4 +1,5 @@
 import React from 'react'
+import english from './imagesBank/english.png';
 
 export default function TopInfo() {
   return (
@@ -7,7 +8,7 @@ export default function TopInfo() {
             <div className="info">
                 <div>Marketplace</div>
                 <div>Help & FAQs</div>
-                <div><img src="./imageBank/english.png" alt="change language"/></div>
+                <div><img src={english} alt="change language"/></div>
             </div>
         </div>
     </section>
