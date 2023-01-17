@@ -1,4 +1,4 @@
-export const listings = {
+const listings = {
     items: [
         {
             code: 119948869,
@@ -55,7 +55,7 @@ export const listings = {
                     "Regular fit"
                 ]
             },
-            brand: "This is ASOS DESIGN – your go-to for all the latest trends, no matter who you are, where you’re from and what you’re up to. Exclusive to ASOS, our universal brand is here for you, and comes in all our fit ranges: ASOS Curve, Tall, Petite and Maternity. Created by us, styled by you.",
+            brand: "ASOS DESIGN",
             size: {
                 para1: [
                     "Model wears: UK 18/ EU 46/ US 14",
@@ -90,7 +90,7 @@ export const listings = {
                     "Regular fit"
                 ]
             },
-            brand: "This is ASOS DESIGN – your go-to for all the latest trends, no matter who you are, where you’re from and what you’re up to. Exclusive to ASOS, our universal brand is here for you, and comes in all our fit ranges: ASOS Curve, Tall, Petite and Maternity. Created by us, styled by you.",
+            brand: "ASOS DESIGN",
             size: {
                 para1: [
                     "Model wears: UK 8/ EU 36/ US 4",
@@ -125,7 +125,7 @@ export const listings = {
                     "Oversized fit"
                 ]
             },
-            brand: "Serving new-new fashion and the best of basics, Bershka gets its inspiration from the latest music, technology and social media trends. Think jeans that hit different, fresh new outerwear, all-over-print dresses and cosy knitwear and sweats – when we say this brand has you covered, we’re not kidding. Scroll the Bershka at ASOS edit and get to know our pick of its clothing, shoes and accessories. Next stop: checkout.",
+            brand: "Bershka",
             size: {
                 para1: [
                     "Model wears: UK S/ EU S/ US XS",
@@ -161,7 +161,7 @@ export const listings = {
                     "True to size"
                 ]
             },
-            brand: "Founded in 1968 by sisters Jocelyn Bismuth and Odette Barouch, French label Morgan opened its first store in Paris’ 6th arrondissement. Known for its ready-to-wear collections, the brand’s coats, jackets, jumpers and dresses are your new look du jour.",
+            brand: "Morgan",
             size: {
                 para1: [
                     "Model wears: UK 8/ EU 36/ US 4",
@@ -196,7 +196,7 @@ export const listings = {
                     "Regular fit"
                 ]
             },
-            brand: "This is ASOS DESIGN – your go-to for all the latest trends, no matter who you are, where you’re from and what you’re up to. Exclusive to ASOS, our universal brand is here for you, and comes in all our fit ranges: ASOS Curve, Tall, Petite and Maternity. Created by us, styled by you.",
+            brand: "ASOS DESIGN",
             size: {
                 para1: [
                     "Model wears: UK 8/ EU 36/ US 4",
@@ -229,7 +229,7 @@ export const listings = {
                     "Chunky sole",
                 ]
             },
-            brand: "This is ASOS DESIGN – your go-to for all the latest trends, no matter who you are, where you’re from and what you’re up to. Exclusive to ASOS, our universal brand is here for you, and comes in all our fit ranges: ASOS Curve, Tall, Petite and Maternity. Created by us, styled by you.",
+            brand: "ASOS DESIGN",
             size: null,
             care: "Wipe clean with a damp cloth or sponge",
             about: {
@@ -260,7 +260,7 @@ export const listings = {
                     "Wide fit"
                 ]
             },
-            brand: "Since setting up shop in the 60s, New Look has become a high-street classic known for creating universally loved, wardrobe-ready collections. Shop the New Look at ASOS edit, featuring everything from chic LBDs and printed dresses to all-important accessories and figure-flattering jeans (if you’re anything like us, you’re always on the hunt for those). While you’re there, check out the label’s cute-yet-classy tops and blouses for your next ‘jeans and a nice top’ day.",
+            brand: "New Look",
             size: null,
             care: "Do not wash",
             about: {
@@ -279,3 +279,4 @@ export const listings = {
 
 }
 
+export const {items} = listings;
