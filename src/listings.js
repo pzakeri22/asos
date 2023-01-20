@@ -4,7 +4,7 @@ const listings = {
             code: 119948869,
             title: "Closet London Maternity belted tie waist mini dress in emerald green",
             price: 55.00,
-            colour: "Emerald",
+            colour: "Green",
             fit: "maternity",
             details: {
                 heading: "Maternity by Closet London Maternity",
@@ -42,7 +42,7 @@ const listings = {
             code: 113445771,
             title: "ASOS DESIGN Curve twist and drape front midi dress in duck egg",
             price: 42.00,
-            colour: "DUCK EGG",
+            colour: "BLUE",
             fit: "Asos Curve",
             details: {
                 heading: "Plus-size dress by ASOS DESIGN",
@@ -77,7 +77,7 @@ const listings = {
             code: 118974164,
             title: "ASOS DESIGN angel sleeve keyhole front midi shift dress in pop green",
             price: 44.00,
-            colour: "POP GREEN",
+            colour: "GREEN",
             fit: null,
             details: {
                 heading: "Dresses by ASOS DESIGN",
@@ -112,7 +112,7 @@ const listings = {
             code: 115022054,
             title: "Bershka core oversized blazer in camel",
             price: 29.99,
-            colour: "camel",
+            colour: "Neutral",
             fit: null,
             details: {
                 heading: "Blazer by Bershka",
@@ -183,7 +183,7 @@ const listings = {
             code: 118655333,
             title: "ASOS DESIGN frill high neck smock top with pleat volume sleeve in light blue",
             price: 32.00,
-            colour: "LIGHT BLUE",
+            colour: "BLUE",
             fit: null,
             details: {
                 heading: "Top by ASOS DESIGN",

@@ -9,12 +9,18 @@ $grey1: hsl(0, 0, 17.6%); // off-black
 $grey2: hsl(0, 1.2%, 31.8%); //departments-nav
 $grey3: hsl(0, 0, 40%); //sort filter text, all footer text
 $grey4: hsl(0,0, 45.9%); //search-text
+$grey45: hsl(0,0, 57%); //search-text
+$grey46: hsl(0, 0, 70%); //bottom footer background
 $grey5: hsl(0, 0, 86.7%); //bottom footer background
 $grey6: hsl(0, 0, 93.3%); //sort filter background, footer background
 $grey7: hsl(0, 0, 97.3%); //workwear category background
 $lightest: white;    
 $accent: hsl(344, 83.3%, 44.5%); 
 
+
+* {
+  // outline: 1px solid brown;
+}
 //Vars 
 :root {
   --rad: 2rem; 
@@ -27,11 +33,6 @@ $accent: hsl(344, 83.3%, 44.5%);
   --height: 2.4rem; 
   --btn-width: 6rem;
   --bez: cubic-bezier(0, 0, 0.43, 1.49); 
-}
-
-* {
-  // outline: 1px solid brown;  
-  //outline : xxx
 }
 
 .burger {
@@ -531,7 +532,7 @@ $accent: hsl(344, 83.3%, 44.5%);
     display: flex;
     justify-content: center;
 
-     .select {
+     .select {  
       width: 313px;
       display: flex;
       justify-content: center; // perhaps dont need once everything has wrapped
@@ -540,7 +541,7 @@ $accent: hsl(344, 83.3%, 44.5%);
       position: relative;
       padding: 1rem 0rem;      
 
-      .wrapper {
+      .wrapper { //box inside button
         display: flex;
         align-items: center;
         width: 100%;
@@ -614,7 +615,7 @@ $accent: hsl(344, 83.3%, 44.5%);
       padding: 0 2rem;
       margin: 0.5rem 0;
 
-      .select {
+      .select { 
         //once selected, border top 2px solid blue
         border-top: 1px solid $grey5;
         border-bottom: 1px solid $grey5;
@@ -623,9 +624,9 @@ $accent: hsl(344, 83.3%, 44.5%);
         margin: 0;
         justify-content: space-between;
         padding: 0;
-
-        .wrapper {
-          display: flex;
+ 
+        .wrapper { //box inside button
+          display: flex; 
           justify-content: space-between;
           border: none;
         
@@ -661,21 +662,22 @@ $accent: hsl(344, 83.3%, 44.5%);
         display: none;
       }
 
-      .type, .brand, .colour, .fit, .price {
+      .type, .brand, .colour, .fit, .price { //button
         display: flex;
       }
 
-      .dropdown.desktop {
+      .dropdown.desktop { //dropdown  desktop or price container is causing all issues. still had same issue OUTSIDE of dropdown desktop
+
         width: 22rem;
         position: absolute;
         top: 43px;
         left: 3px;
         display: flex;
-        flex-direction: column;
+
+        // flex-direction: column;
         background-color: $grey6;
         font-family: 'futura-pt';
         padding: 0.5rem;
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 
         ul {
@@ -703,6 +705,62 @@ $accent: hsl(344, 83.3%, 44.5%);
 
       }  
 
+      .price .dropdown.desktop {
+        li {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 90px;
+          // padding: 5px !important; 
+
+          .MuiBox-root {
+            margin-left: -6px;
+            margin-top: 35px;
+            width: 285px;
+
+            .MuiSlider-rail {
+              background-color: $grey46;
+              height: 5px;
+
+            }
+            .MuiSlider-track {
+              background-color: $grey45;
+              border: 1px solid $grey45;
+              height: 5px;
+
+            }
+
+            .MuiSlider-thumb {
+              height: 23px;
+              width: 23px;
+              background-color: $grey2;
+            }
+
+
+            .MuiSlider-thumb {
+              .MuiSlider-valueLabel{
+                // display: none;
+              }
+            }
+
+            .MuiSlider-thumb.Mui-active {
+              box-shadow: none;
+              background-color: #1976d2;
+              height: 30px;
+              width: 30px;
+            }
+
+            .MuiSlider-thumb.Mui-focusVisible {
+              box-shadow: none;
+
+            }
+
+          }
+
+          
+        }
+      }
+
     }
   }
 }
@@ -724,3 +782,133 @@ $accent: hsl(344, 83.3%, 44.5%);
 
 }
 
+
+
+
+/*
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+
+.price-container {   //display flex applied to parent, dropdown-desktop
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // min-height: 100vh;
+  // background: #17A2B8;
+
+  ::selection{
+    color: #fff;
+    background: #17A2B8;
+  }
+
+  .price-wrapper{
+    // width: 400px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px 25px 40px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+  }
+
+  .price-input{
+    width: 100%;
+    display: flex;
+    margin: 30px 0 35px;
+  }
+  .price-input .field{
+    display: flex;
+    width: 100%;
+    height: 45px;
+    align-items: center;
+  }
+  .field input{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    font-size: 19px;
+    margin-left: 12px;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #999;
+    -moz-appearance: textfield;
+  }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  .price-input .separator{
+    width: 130px;
+    display: flex;
+    font-size: 19px;
+    align-items: center;
+    justify-content: center;
+  }
+  .slider{
+    height: 5px;
+    position: relative;
+    background: #ddd;
+    border-radius: 5px;
+  }
+  .slider .progress{
+
+    height: 100%;
+    left: 25%;
+    right: 25%;
+    position: absolute;
+    border-radius: 5px;
+    background: #17A2B8;
+
+    
+  }
+  .range-input{
+    position: relative;
+  }
+  .range-input input{
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    top: -5px;
+    
+
+    background: none;
+    pointer-events: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+
+    left: 0;  //hack to fix input layout
+    // right: 0;
+
+  }
+  input[type="range"]::-webkit-slider-thumb{
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    background: #17A2B8;
+    pointer-events: auto;
+    -webkit-appearance: none;
+    box-shadow: 0 0 6px rgba(0,0,0,0.05);
+  }
+  input[type="range"]::-moz-range-thumb{
+    height: 17px;
+    width: 17px;
+    border: none;
+    border-radius: 50%;
+    background: #17A2B8;
+    pointer-events: auto;
+    -moz-appearance: none;
+    box-shadow: 0 0 6px rgba(0,0,0,0.05);
+  }
+}
+
+
+
+/*
+
+
+
+
+
+
+*/

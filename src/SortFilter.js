@@ -2,6 +2,7 @@
 // import Filter from './Filter';
 import React, { useEffect, useState } from "react";
 import {items} from "./listings.js";
+import MinimumDistanceSlider from './PriceFilter.js';
 
 export default function SortFilter() {
 // hiding for now to prevent errors in console while inactive;
@@ -18,6 +19,10 @@ export default function SortFilter() {
     const [colours, setColours] = useState(null);
     const [fits, setFits] = useState(null);
     const [prices, setPrices] = useState(null);
+    const [chosenPriceRange, setChosenPriceRange] = useState([0, 100]);
+    const [fullPriceRange, setFullPriceRange] = useState([]);
+    const minDistance = 5;
+
 
     //which one is open
     //what is selected in each one?
@@ -26,51 +31,79 @@ export default function SortFilter() {
     //filter - are any of the others, except sort,  selected?
 
     useEffect(() => {
-        const brandList = extractValues("brand"); 
+        let brandList = extractWordFilters("brand"); 
+        brandList = sortArrAscending(brandList);
         setBrands(brandList);
-        const colourList = extractValues("colour"); 
+        let colourList = extractWordFilters("colour"); 
+        colourList = sortArrAscending(colourList);
         setColours(colourList);
-        const fitList = extractValues("fit"); 
+        let fitList = extractWordFilters("fit"); 
+        fitList = sortArrAscending(fitList);
         setFits(fitList);
-        const pricesList = extractValues("price"); 
+        let pricesList = extractPriceFilters("price"); 
+        pricesList = sortArrAscending(pricesList); 
         setPrices(pricesList);
     }, []);
+    
 
-    function extractValues(key) {
-        // for (let i = 0; i < items.length; i++) {
-        //     let dupeCount;
-        //     if (dataChunk.includes(items[i][key])) dupeCount++;
-        //     if (!items[i][key]) continue;
-        //     dataChunk.push(items[i][key]);
-        // }
-        // let dataChunk = [];
+    function sortArrAscending(arr) {
+        return arr.sort();
+    }
 
+    function extractWordFilters(key) {
         let hash = {};
-
         for (let i = 0; i < items.length; i++) {
-            const targetKey = items[i][key];
-            // console.log(targetKey)
-            if (!targetKey) continue;
-            if (Object.hasOwn(hash, targetKey)) {
-                hash[targetKey]++
-                // console.log(hash[targetKey]);
+            let targetVal = items[i][key];
+            if (!targetVal) continue;
+            if (typeof targetVal === "string") {
+                let wordSplit = targetVal.toLowerCase().split(' ');
+                for (let i=0; i<wordSplit.length; i++) {
+                    wordSplit[i] = `${wordSplit[i].substring(0, 1).toUpperCase()}${wordSplit[i].substring(1)}`;
+                }
+                targetVal = wordSplit.join(' ');
+            }
+            if (Object.hasOwn(hash, targetVal)) {
+                hash[targetVal]++;
             } else {
-                hash[targetKey] = 1;
-                console.log(`${targetKey} = ${hash[targetKey]}`)
-
+                hash[targetVal] = 1;
             }
         }
-        console.log(hash);
-        return hash;
+        let pairsArr = Object.entries(hash);
+        pairsArr.forEach(pair => pair[1] = `(${pair[1]})`)
+        pairsArr = pairsArr.map(pair => pair.join('\xa0\xa0'));
+        return pairsArr;
+    }
 
-        /* 
-            brands[0] + key[0]
-        */
+    function extractPriceFilters(key) {
+        const priceArr = [];
+        for (let i = 0; i < items.length; i++) {
+            priceArr.push(items[i][key]);
+        }
+        const lowestPrice = Math.min(...priceArr);
+        console.log(lowestPrice);
+        const highestPrice = Math.max(...priceArr);
+        console.log(highestPrice);
+
+        setFullPriceRange([lowestPrice, highestPrice]);
+        return priceArr;
     }
 
     function handleClick(buttonName) {
         setCurrentDropdown(buttonName);
     }
+
+    function storePriceChange(event, newValue, activeThumb) {
+        if (!Array.isArray(newValue)) {
+            return;
+        }
+
+        if (activeThumb === 0) {
+            setChosenPriceRange([Math.min(newValue[0], chosenPriceRange[1] - minDistance), chosenPriceRange[1]]);
+        } else {
+            setChosenPriceRange([chosenPriceRange[0], Math.max(newValue[1], chosenPriceRange[0] + minDistance)]);
+        }
+    }
+
 
     return (
         <section className="sort-filter">
@@ -104,11 +137,11 @@ export default function SortFilter() {
                         </div>
                         <div className={`dropdown desktop ${currentDropdown === "type"? "open": "closed"}`}>
                             <ul>
-                                <li value="dresses">Dresses</li>
-                                <li value="blazers">Blazers</li>
-                                <li value="skirts">Skirts</li>
-                                <li value="tops">Tops</li>
-                                <li value="shoes">Shoes</li>
+                                <li value="dresses">Dresses &nbsp;(3)</li>
+                                <li value="blazers">Blazers &nbsp;(1)</li>
+                                <li value="skirts">Skirts &nbsp;(1)</li>
+                                <li value="tops">Tops &nbsp;(1)</li>
+                                <li value="shoes">Shoes &nbsp;(2)</li>
                             </ul>
                         </div>
                     </button>
@@ -119,16 +152,9 @@ export default function SortFilter() {
                         </div>
                         <div className={`dropdown desktop ${currentDropdown === "type"? "open": "closed"}`}>
                             <ul>
-                                {/* {brands ? 
+                                {brands ? 
                                     brands.map((brand, index) => <li value={brand} key={index}>{brand}</li>) 
-                                : "" } */}
-                                {/* [{brand1, count1}, {brand2, count2}] 
-                                */}
-
-                                {/* {brands ? 
-                                    brands.map((brand, index) => <li value={brand} key={index}>{brand}</li>) 
-                                : "" } */}
-
+                                : "" }
                             </ul>
                         </div>
                     </button>
@@ -139,9 +165,9 @@ export default function SortFilter() {
                         </div>
                         <div className={`dropdown desktop ${currentDropdown === "type"? "open": "closed"}`}>
                             <ul>
-                                {/* {colours ? 
+                                {colours ? 
                                     colours.map((colour, index) => <li value={colour} key={index}>{colour}</li>) 
-                                : "" } */}
+                                : "" }
                             </ul>
                         </div>
 
@@ -153,9 +179,9 @@ export default function SortFilter() {
                         </div>
                         <div className={`dropdown desktop ${currentDropdown === "type"? "open": "closed"}`}>
                             <ul>
-                                {/* {fits ? 
+                                {fits ? 
                                     fits.map((fit, index) => <li value={fit} key={index}>{fit}</li>) 
-                                : "" } */}
+                                : "" }
                             </ul>
                         </div>
                         
@@ -167,12 +193,17 @@ export default function SortFilter() {
                         </div>
                         <div className={`dropdown desktop ${currentDropdown === "type"? "open": "closed"}`}>
                             <ul>
-                                {/* {prices ? 
-                                    prices.map((price, index) => <li value={price} key={index}>{price}</li>) 
-                                : "" } */}
+                                <li>
+                                    <MinimumDistanceSlider
+                                    storePriceChange={storePriceChange} 
+                                    chosenPriceRange={chosenPriceRange}
+                                    fullPriceRange={fullPriceRange}
+                                    />
+                                </li>
                             </ul>
                         </div>
                     </button>
+
             </div>
         </section>
     )
