@@ -14,21 +14,26 @@ export default function SortFilter() {
     // const [priceOptions, setPriceOptions] = useState("");
     // const [filterActive, setFilterActive] = useState(false);
     const [currentDropdown, setCurrentDropdown] = useState("");
-
     const [brands, setBrands] = useState(null);
     const [colours, setColours] = useState(null);
     const [fits, setFits] = useState(null);
-    const [prices, setPrices] = useState(null);
-    const [chosenPriceRange, setChosenPriceRange] = useState([0, 100]);
-    const [fullPriceRange, setFullPriceRange] = useState([]);
+    const [fullPriceRange, setFullPriceRange] = useState([]);//causing the 5 minimum distance to break
+    const [chosenPriceRange, setChosenPriceRange] = useState([]); 
     const minDistance = 5;
-
-
     //which one is open
     //what is selected in each one?
     //class for open menu - open vs closed
     //class for closed menu with category selected vs none select
     //filter - are any of the others, except sort,  selected?
+
+    const lowestPriceLabel = document.querySelector(".price-label > .lowest");
+    const highestPriceLabel = document.querySelector(".price-label > .highest");
+    const pricethumb1active = document.querySelector(".MuiSlider-thumb.Mui-active");
+    // const pricethumb1active = document.querySelector(".MuiSlider-thumb.Mui-active");
+
+    if (pricethumb1active) {lowestPriceLabel.style.colour="blue";}
+    // if (pricethumb1active) {lowestPriceLabel.style.colour="blue";}
+
 
     useEffect(() => {
         let brandList = extractWordFilters("brand"); 
@@ -41,8 +46,8 @@ export default function SortFilter() {
         fitList = sortArrAscending(fitList);
         setFits(fitList);
         let pricesList = extractPriceFilters("price"); 
-        pricesList = sortArrAscending(pricesList); 
-        setPrices(pricesList);
+        setFullPriceRange(pricesList);
+        setChosenPriceRange(pricesList);
     }, []);
     
 
@@ -69,23 +74,17 @@ export default function SortFilter() {
             }
         }
         let pairsArr = Object.entries(hash);
-        pairsArr.forEach(pair => pair[1] = `(${pair[1]})`)
-        pairsArr = pairsArr.map(pair => pair.join('\xa0\xa0'));
         return pairsArr;
     }
 
     function extractPriceFilters(key) {
-        const priceArr = [];
-        for (let i = 0; i < items.length; i++) {
-            priceArr.push(items[i][key]);
+        let lowestPrice = items[0][key];
+        let highestPrice = items[0][key];
+        for (let i = 1; i < items.length; i++) {
+            if (items[i][key] > highestPrice) highestPrice=items[i][key];
+            if (items[i][key] < lowestPrice) lowestPrice=items[i][key];
         }
-        const lowestPrice = Math.min(...priceArr);
-        console.log(lowestPrice);
-        const highestPrice = Math.max(...priceArr);
-        console.log(highestPrice);
-
-        setFullPriceRange([lowestPrice, highestPrice]);
-        return priceArr;
+        return [lowestPrice, highestPrice];
     }
 
     function handleClick(buttonName) {
@@ -96,12 +95,23 @@ export default function SortFilter() {
         if (!Array.isArray(newValue)) {
             return;
         }
+        const highestLimit = Math.round((chosenPriceRange[1] - minDistance) * 100) / 100;
+        const lowestLimit = Math.round((chosenPriceRange[0] + minDistance) * 100) / 100;
+        
+        const lowestPriceLabel = document.querySelector(".price-label > .lowest");
+        const highestPriceLabel = document.querySelector(".price-label > .highest");
 
         if (activeThumb === 0) {
-            setChosenPriceRange([Math.min(newValue[0], chosenPriceRange[1] - minDistance), chosenPriceRange[1]]);
+            lowestPriceLabel.style.color="blue";
+            setChosenPriceRange([Math.min(newValue[0], highestLimit), chosenPriceRange[1]]);
         } else {
-            setChosenPriceRange([chosenPriceRange[0], Math.max(newValue[1], chosenPriceRange[0] + minDistance)]);
+            highestPriceLabel.style.color="blue";
+            setChosenPriceRange([chosenPriceRange[0], Math.max(newValue[1], lowestLimit)]);
         }
+
+        lowestPriceLabel.style.color="black";
+        highestPriceLabel.style.color="black";
+
     }
 
 
@@ -136,6 +146,7 @@ export default function SortFilter() {
                             <img src="./imageBank/down-arrow.png" alt=""/>
                         </div>
                         <div className={`dropdown desktop ${currentDropdown === "type"? "open": "closed"}`}>
+                            <div className="overview"></div>
                             <ul>
                                 <li value="dresses">Dresses &nbsp;(3)</li>
                                 <li value="blazers">Blazers &nbsp;(1)</li>
@@ -151,10 +162,11 @@ export default function SortFilter() {
                             <img src="./imageBank/down-arrow.png" alt=""/>
                         </div>
                         <div className={`dropdown desktop ${currentDropdown === "type"? "open": "closed"}`}>
+                        <div className="overview"></div>
                             <ul>
-                                {brands ? 
-                                    brands.map((brand, index) => <li value={brand} key={index}>{brand}</li>) 
-                                : "" }
+                                {brands? 
+                                   brands.map((brand, index) => <li value={brand[0]} key={index}>{brand[0]}&nbsp;&nbsp;{`(${brand[1]})`}</li>) 
+                                : ""}
                             </ul>
                         </div>
                     </button>
@@ -164,9 +176,10 @@ export default function SortFilter() {
                             <img src="./imageBank/down-arrow.png" alt=""/>
                         </div>
                         <div className={`dropdown desktop ${currentDropdown === "type"? "open": "closed"}`}>
+                            <div className="overview"></div>
                             <ul>
                                 {colours ? 
-                                    colours.map((colour, index) => <li value={colour} key={index}>{colour}</li>) 
+                                    colours.map((colour, index) => <li value={colour[0]} key={index}><div className={`${colour[0].toLowerCase()} sample`}></div>{colour[0]}&nbsp;&nbsp;{`(${colour[1]})`}</li>) 
                                 : "" }
                             </ul>
                         </div>
@@ -178,10 +191,12 @@ export default function SortFilter() {
                             <img src="./imageBank/down-arrow.png" alt=""/>
                         </div>
                         <div className={`dropdown desktop ${currentDropdown === "type"? "open": "closed"}`}>
+                            <div className="overview"></div>
                             <ul>
                                 {fits ? 
-                                    fits.map((fit, index) => <li value={fit} key={index}>{fit}</li>) 
+                                    fits.map((fit, index) => <li value={fit[0]} key={index}>{fit[0]}&nbsp;&nbsp;{`(${fit[1]})`}</li>) 
                                 : "" }
+
                             </ul>
                         </div>
                         
@@ -192,8 +207,13 @@ export default function SortFilter() {
                             <img src="./imageBank/down-arrow.png" alt=""/>
                         </div>
                         <div className={`dropdown desktop ${currentDropdown === "type"? "open": "closed"}`}>
+                            <div className="overview"></div>
                             <ul>
                                 <li>
+                                    <div className="price-label">
+                                        <div className="lowest">£{chosenPriceRange[0]}</div>
+                                        <div className="highest">£{chosenPriceRange[1]}</div>
+                                    </div>
                                     <MinimumDistanceSlider
                                     storePriceChange={storePriceChange} 
                                     chosenPriceRange={chosenPriceRange}

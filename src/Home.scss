@@ -673,14 +673,20 @@ $accent: hsl(344, 83.3%, 44.5%);
         top: 43px;
         left: 3px;
         display: flex;
-
-        // flex-direction: column;
+        flex-direction: column;
         background-color: $grey6;
         font-family: 'futura-pt';
-        padding: 0.5rem;
         box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 
+        .overview {
+          height: 50px;
+          width: 100%;
+          background-color: $grey7;
+
+        }
+
         ul {
+          padding: 0.5rem;
           display: flex;
           flex-direction: column;
           // justify-content: center;
@@ -701,22 +707,40 @@ $accent: hsl(344, 83.3%, 44.5%);
           border-radius: 5px;
           padding: 0.8rem;
 
+          // come back to this
+          display: flex;  //if multiple items inside the list
+          gap: 1rem;
+          align-items: center;
+
         }
 
       }  
 
       .price .dropdown.desktop {
         li {
-          display: flex;
-          align-items: center;
+          flex-direction: column;
+          // align-items: center;
           justify-content: center;
-          height: 90px;
+          height: 100px;
           // padding: 5px !important; 
+          gap: 0.4rem;
+
+          > * {
+            margin-left: -6px;
+
+          }
+          .price-label {
+            width: 97%;
+            display: flex;
+            justify-content: space-between; 
+            font-size: 0.9rem;
+            color: black;
+          }
 
           .MuiBox-root {
             margin-left: -6px;
-            margin-top: 35px;
-            width: 285px;
+            // margin-top: 35px;
+            width: 275px;
 
             .MuiSlider-rail {
               background-color: $grey46;
@@ -733,13 +757,13 @@ $accent: hsl(344, 83.3%, 44.5%);
             .MuiSlider-thumb {
               height: 23px;
               width: 23px;
-              background-color: $grey2;
+              background-color: $grey1;
             }
 
 
             .MuiSlider-thumb {
               .MuiSlider-valueLabel{
-                // display: none;
+                display: none;
               }
             }
 
@@ -756,9 +780,33 @@ $accent: hsl(344, 83.3%, 44.5%);
             }
 
           }
-
+          
           
         }
+      }
+
+      .colour .dropdown.desktop li {
+        padding: 0;
+      }
+
+      .colour .dropdown.desktop .sample {
+        height: 46px;
+        width: 46px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+
+      }
+      .colour .dropdown.desktop .black.sample {
+        background-color: rgb(46, 46, 46); 
+      }
+      .colour .dropdown.desktop .blue.sample {
+        background-color: rgb(103, 128, 185); 
+      }
+      .colour .dropdown.desktop .green.sample {
+        background-color: rgb(94, 167, 89); 
+      }
+      .colour .dropdown.desktop .neutral.sample {
+        background-color: rgb(198, 161, 117); 
       }
 
     }
