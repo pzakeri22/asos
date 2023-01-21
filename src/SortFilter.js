@@ -19,20 +19,13 @@ export default function SortFilter() {
     const [fits, setFits] = useState(null);
     const [fullPriceRange, setFullPriceRange] = useState([]);//causing the 5 minimum distance to break
     const [chosenPriceRange, setChosenPriceRange] = useState([]); 
+    const [activePriceFilter, setActivePriceFilter] = useState(null);
     const minDistance = 5;
     //which one is open
     //what is selected in each one?
     //class for open menu - open vs closed
     //class for closed menu with category selected vs none select
     //filter - are any of the others, except sort,  selected?
-
-    const lowestPriceLabel = document.querySelector(".price-label > .lowest");
-    const highestPriceLabel = document.querySelector(".price-label > .highest");
-    const pricethumb1active = document.querySelector(".MuiSlider-thumb.Mui-active");
-    // const pricethumb1active = document.querySelector(".MuiSlider-thumb.Mui-active");
-
-    if (pricethumb1active) {lowestPriceLabel.style.colour="blue";}
-    // if (pricethumb1active) {lowestPriceLabel.style.colour="blue";}
 
 
     useEffect(() => {
@@ -92,6 +85,9 @@ export default function SortFilter() {
     }
 
     function storePriceChange(event, newValue, activeThumb) {
+        // triggers when price filter is first clicked or if value changes
+
+        console.log(123);
         if (!Array.isArray(newValue)) {
             return;
         }
@@ -100,6 +96,8 @@ export default function SortFilter() {
         
         const lowestPriceLabel = document.querySelector(".price-label > .lowest");
         const highestPriceLabel = document.querySelector(".price-label > .highest");
+
+        // store in state which thumb is pressed. depending on which thumb in pressed, (onmousedown)
 
         if (activeThumb === 0) {
             lowestPriceLabel.style.color="blue";
@@ -114,6 +112,55 @@ export default function SortFilter() {
 
     }
 
+    const usePriceFilter = (e) => {
+        // what, if anything, should go in state. The fact that mouseup or mousedown is activated? Maybe, but we also need to store which event it is tied to as well. 
+        // triggers when mouse is down on price filter, or mouse is released from price filter
+        const leftPriceThumb = document.querySelector('[data-index="0"]');
+        const rightPriceThumb = document.querySelector('[data-index="1"]');
+        const lowestPriceLabel = document.querySelector(".price-label > .lowest");
+        const highestPriceLabel = document.querySelector(".price-label > .highest");
+
+        // console.log(e.type);
+        if (e.type === "mousedown") {
+            if ( leftPriceThumb.classList.contains("Mui-active") ) {
+                setActivePriceFilter("left");
+                lowestPriceLabel.style.colour="blue";
+            }; 
+             if ( rightPriceThumb.classList.contains("Mui-active") ) {
+                setActivePriceFilter("right");
+                highestPriceLabel.style.colour="blue";
+            }; 
+        }
+
+        if (e.type === "mouseup") {
+            if ( !leftPriceThumb.classList.contains("Mui-active") ) {
+                setActivePriceFilter(null);
+                lowestPriceLabel.style.colour="black";
+            }; 
+             if ( !rightPriceThumb.classList.contains("Mui-active") ) {
+                setActivePriceFilter(null);
+                highestPriceLabel.style.colour="black";
+            }; 
+        }
+        /* 
+
+        */
+    
+        // if (pricethumb1active) {lowestPriceLabel.style.colour="blue";}
+        // if (leftPriceThumb. ) {
+    
+        // }
+        // if (pricethumb1active) {lowestPriceLabel.style.colour="blue";}
+    
+        /* 
+        event listener - press and hold - if press and hold on thumb, (will still need to check which one is active) change colour of price label. How know which thumb it is?
+        when mui-active label is visible on thumb (or in general), (will still need to check which one is active) change colour of price label. Else if its not, make it black
+        NO - when entering handleChange function, change colour of price label. then when leaves, change it back? 
+        */
+
+
+
+    }
 
     return (
         <section className="sort-filter">
@@ -218,6 +265,7 @@ export default function SortFilter() {
                                     storePriceChange={storePriceChange} 
                                     chosenPriceRange={chosenPriceRange}
                                     fullPriceRange={fullPriceRange}
+                                    usePriceFilter={usePriceFilter}
                                     />
                                 </li>
                             </ul>

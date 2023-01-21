@@ -12,6 +12,7 @@ export default function MinimumDistanceSlider(props) {
     const chosenPriceRange = props.chosenPriceRange;
     const handleChange = props.storePriceChange;
     const fullPriceRange = props.fullPriceRange;
+    const usePriceFilter = props.usePriceFilter;
 
     return (
         <Box sx={{ width: 300 }}>
@@ -19,12 +20,13 @@ export default function MinimumDistanceSlider(props) {
             getAriaLabel={() => 'Minimum distance'}
             value={chosenPriceRange}
             onChange={handleChange}
+            onMouseDown={usePriceFilter}
+            onMouseUp={usePriceFilter}
             valueLabelDisplay="auto"
             getAriaValueText={valuetext}
             disableSwap
             min={fullPriceRange[0]}
             max={fullPriceRange[1]}
-
             />
         </Box>
     );
