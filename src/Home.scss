@@ -629,7 +629,12 @@ $accent: hsl(344, 83.3%, 44.5%);
           display: flex; 
           justify-content: space-between;
           border: none;
+          margin: 0 0.3rem;
         
+          img {
+            height: 0.5rem;
+            width: 0.65rem;
+          }
         }
 
          p {
@@ -666,8 +671,16 @@ $accent: hsl(344, 83.3%, 44.5%);
         display: flex;
       }
 
-      .dropdown.desktop { //dropdown  desktop or price container is causing all issues. still had same issue OUTSIDE of dropdown desktop
+      // .select.open {
+      //   > 
+      // }
 
+      
+      .select.closed {
+        
+      }
+
+      .dropdown.desktop { //dropdown  desktop or price container is causing all issues. still had same issue OUTSIDE of dropdown desktop
         width: 22rem;
         position: absolute;
         top: 43px;
@@ -717,6 +730,9 @@ $accent: hsl(344, 83.3%, 44.5%);
       }  
 
       .price .dropdown.desktop {
+        left: initial;
+        right: 0;
+
         li {
           flex-direction: column;
           // align-items: center;
@@ -734,7 +750,13 @@ $accent: hsl(344, 83.3%, 44.5%);
             display: flex;
             justify-content: space-between; 
             font-size: 0.9rem;
-            color: black;
+            font-weight: bold;
+            color: $grey3;
+            
+          }
+
+          .price-label .active {
+            color: #1976d2;
           }
 
           .MuiBox-root {
